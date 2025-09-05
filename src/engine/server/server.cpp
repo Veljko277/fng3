@@ -979,14 +979,14 @@ void CServer::ProcessClientPacket(CNetChunk *pPacket)
 			if((pPacket->m_Flags&NET_CHUNKFLAG_VITAL) != 0 && m_aClients[ClientID].m_State == CClient::STATE_AUTH)
 			{
 				const char *pVersion = Unpacker.GetString(CUnpacker::SANITIZE_CC);
-				if(str_comp(pVersion, GameServer()->NetVersion()) != 0)
-				{
-					// wrong version
-					char aReason[256];
-					str_format(aReason, sizeof(aReason), "Wrong version. Server is running '%s' and client '%s'", GameServer()->NetVersion(), pVersion);
-					m_NetServer.Drop(ClientID, aReason);
-					return;
-				}
+				// if(str_comp(pVersion, GameServer()->NetVersion()) != 0)
+				// {
+				// 	// wrong version
+				// 	char aReason[256];
+				// 	str_format(aReason, sizeof(aReason), "Wrong version. Server is running '%s' and client '%s'", GameServer()->NetVersion(), pVersion);
+				// 	m_NetServer.Drop(ClientID, aReason);
+				// 	return;
+				// }
 
 				const char *pPassword = Unpacker.GetString(CUnpacker::SANITIZE_CC);
 				if(g_Config.m_Password[0] != 0 && str_comp(g_Config.m_Password, pPassword) != 0)

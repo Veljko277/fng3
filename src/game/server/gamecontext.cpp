@@ -17,9 +17,6 @@
 #include "gamemodes/fng2_4teams.h"
 #include <cstdint>
 
-//other gametypes(for modding without changing original sources)
-#include "gamecontext_additional_gametypes_includes.h"
-
 #include "laserText.h"
 
 #include <vector>
@@ -1899,10 +1896,7 @@ void CGameContext::OnInit(/*class IKernel *pKernel*/)
 		m_pController = new CGameControllerFNG2BoomSolo(this);
 	else if (str_comp(m_Config->m_SvGametype, "fng24teams") == 0)
 		m_pController = new CGameControllerFNG24Teams(this);
-	else 
-#define CONTEXT_INIT_WITHOUT_CONFIG
-#include "gamecontext_additional_gametypes.h"
-#undef CONTEXT_INIT_WITHOUT_CONFIG
+	else
 		m_pController = new CGameControllerFNG2(this);
 		
 	if(m_Config->m_SvEmoteWheel) m_pController->m_pGameType = "fng2+";
@@ -1992,7 +1986,6 @@ void CGameContext::OnInit(IKernel *pKernel, IMap* pMap, CConfiguration* pConfigF
 	else if (str_comp(pConfig->m_SvGametype, "fng24teams") == 0)
 		m_pController = new CGameControllerFNG24Teams(this, *pConfig);
 	else 
-#include "gamecontext_additional_gametypes.h"
 		m_pController = new CGameControllerFNG2(this, *pConfig);
 
 	if(m_Config->m_SvEmoteWheel) m_pController->m_pGameType = "fng2+";
